@@ -1,6 +1,9 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -18,9 +21,9 @@ enum OrderStatus {
 }
 
 model Order {
-  id          String   @id @default(uuid())
-  totalAmount Float    @default(0.0) // Valor predeterminado agregado
-  totalItems  Int      @default(0)   // Valor predeterminado agregado
+  id          String @id @default(uuid())
+  totalAmount Float
+  totalItems  Int
 
   status         OrderStatus @default(PENDING)
   paid           Boolean     @default(false)
@@ -28,23 +31,22 @@ model Order {
   stripeChargeId String?
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
+  updatedAt DateTime @updatedAt
 
   OrderItem    OrderItem[]
   OrderReceipt OrderReceipt?
 }
 
-
 model OrderItem {
   id        String @id @default(uuid())
   productId Int
-  quantity  Int      @default(1) // Valor predeterminado agregado
-  price     Float    @default(0.0) // Valor predeterminado agregado
+  quantity  Int
+  price     Float
 
-  // Relación corregida: La relación y el campo escalar `orderId` son opcionales
   Order   Order?  @relation(fields: [orderId], references: [id])
   orderId String?
 }
+
 model OrderReceipt {
   id String @id @default(uuid())
 
@@ -55,4 +57,5 @@ model OrderReceipt {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
 }

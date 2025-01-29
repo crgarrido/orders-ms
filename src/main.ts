@@ -13,7 +13,7 @@ async function bootstrap() {
     {
       transport: Transport.NATS,
       options: {
-        servers: envs.natsServer
+        servers: envs.natsServers
       },
     },
   );
@@ -26,6 +26,6 @@ async function bootstrap() {
   );
 
   await app.listen();
-  logger.log(`Orders Microservice running on port ${envs.port}`);
+  logger.log(`Orders Microservice running on port ${envs.port}!`);
 }
 bootstrap();

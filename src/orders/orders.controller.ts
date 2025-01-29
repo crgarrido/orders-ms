@@ -14,7 +14,7 @@ export class OrdersController {
 
     const order = await this.ordersService.create(createOrderDto);
     const paymentSession = await this.ordersService.createPaymentSession(order)
-
+   
     return {
       order,
       paymentSession,
@@ -23,6 +23,7 @@ export class OrdersController {
 
   @MessagePattern('findAllOrders')
   findAll(@Payload() orderPaginationDto: OrderPaginationDto ) {
+    console.log("createOrder")
     return this.ordersService.findAll(orderPaginationDto);
   }
 
