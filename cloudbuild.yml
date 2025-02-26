@@ -1,0 +1,22 @@
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "build",
+        "-t",
+        "southamerica-west1-docker.pkg.dev/microservices-449514/image-registry/orders-ms",
+        "-f",
+        "dockerfile.prod",
+        "--platform=linux/amd64",
+        ".",
+      ]
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "push",
+        "southamerica-west1-docker.pkg.dev/microservices-449514/image-registry/orders-ms",
+      ]
+options:
+  logging: CLOUD_LOGGING_ONLY  # Alternativamente puedes usar NONE o definir un logsBucket
+  defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET  # Para que use un bucket regional automáticamente
+  
