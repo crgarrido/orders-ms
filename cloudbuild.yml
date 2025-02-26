@@ -18,3 +18,7 @@ availableSecrets:
   secretManager:
   - versionName: projects/377384362022/secrets/orders_database_url/versions/1
     env: 'DATABASE_URL'
+options:
+  logging: CLOUD_LOGGING_ONLY  # Alternativamente puedes usar NONE o definir un logsBucket
+  defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET  # Para que use un bucket regional automáticamente
+  
