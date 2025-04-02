@@ -16,11 +16,11 @@ export class OrdersController {
     const order = await this.ordersService.create(createOrderDto);
 
 
-    const paymentSession = await this.ordersService.createPaymentSession(order)
+    //const paymentSession = await this.ordersService.createPaymentSession(order)
 
     return {
       order,
-      paymentSession,
+      //paymentSession,
     }
   }
 
